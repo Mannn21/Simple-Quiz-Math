@@ -36,10 +36,8 @@ const Question = ({ onCorrectAnswer, questionIndex }) => {
     }, [correctAnswer]);
 
     return (
-        <div>
-            <div>
-                <span>{question}</span>
-            </div>
+        <div className="w-full text-center">
+            <span className="font-bold text-2xl sm:text-3xl md:text-4xl text-white">{question}</span>
         </div>
     )
 }
