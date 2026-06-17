@@ -1,13 +1,20 @@
 import React, { useState, useEffect } from 'react';
 
-const Question = ({ onCorrectAnswer, questionIndex }) => {
+const Question = ({ level, onCorrectAnswer, questionIndex }) => {
     const [question, setQuestion] = useState(null);
     const [correctAnswer, setCorrectAnswer] = useState(null);
 
     useEffect(() => {
+        // Generate minimum number based on the level
+        const min = Math.max(0, (level - 1) * 10);
+
+        // Generate maximum number based on the level
+        const max = level === 0 ? 10 : min + 20;
+
         // Generate random numbers for the question
-        const num1 = Math.floor(Math.random() * 10) + 1;
-        const num2 = Math.floor(Math.random() * 10) + 1
+        const num1 = Math.floor(Math.random() * (max - min + 1)) + min;
+        
+        const num2 = Math.floor(Math.random() * (max - min + 1)) + min;
         const operators = ['+', '-', 'x'];
         const operator = operators[Math.floor(Math.random() * operators.length)];
 
@@ -29,7 +36,7 @@ const Question = ({ onCorrectAnswer, questionIndex }) => {
                 break;
         }
         setCorrectAnswer(answer);
-    }, [questionIndex]);
+    }, [questionIndex, level]);
 
     useEffect(() => {
         onCorrectAnswer(correctAnswer);
